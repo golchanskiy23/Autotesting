@@ -1,31 +1,37 @@
 package org.ok.tests;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class OkLoginPageTest extends BaseTest {
+import org.ok.pages.LoginPage;
+import org.ok.utils.User;
+
+public class IncorrectLoginTest extends BaseTest {
 
     LoginPage loginPage;
+    User user;
 
-    @BeforeEach
+    @BeforeAll
     public void initializeLoginPage() {
         loginPage = new LoginPage();
+        user = new User("blsblsbsl", "blalblala");
     }
 
     @Test
     public void incorrectUserDataWithClick() {
-        login();
+        login(user)
         loginPage.enterWithClick();
         loginPage.isMessageWithIncorrectData();
     }
 
     @Test
     public void incorrectUserDataWithKey() {
-        login();
+        login(user);
         loginPage.enterWithButton();
         loginPage.isMessageWithIncorrectData();
     }
 
     private void login() {
-        loginPage.open().setUserData("blablabla", "12345");
+        loginPage.open().setUserData(user);
     }
+}
