@@ -9,14 +9,21 @@ public class MessagePage implements LoadableComponent {
 
     private final SelenideElement MESSAGE_FIELD = Selenide.$x("//div[@data-tsid='write_msg_input-input']");
 
-    private static final SelenideElement LAST_MESSAGE = Selenide.$$x("//*[@data-tsid='message_text']").last();
     private final SelenideElement SUBMIT_BUTTON = Selenide.$x("//msg-button[@title='Отправить']");
+
+    public MessagePage(){
+        checkExistense();
+    }
 
     @Override
     public void checkExistense() {
         checkIsLoaded(MESSAGE_FIELD);
         checkIsLoaded(MESSAGE_LIST);
         checkIsLoaded(SUBMIT_BUTTON);
+    }
+
+    public MessagesWrapper getMessagesInChat() {
+        return new MessagesWrapper();
     }
 
     public MessagePage sendMessage(String message) {
@@ -27,7 +34,6 @@ public class MessagePage implements LoadableComponent {
     }
 
     public String getLastSentMessage() {
-        checkIsLoaded(LAST_MESSAGE);
-        return LAST_MESSAGE.getText();
+        return getMessagesInChat().getLastMessage().getText();
     }
 }

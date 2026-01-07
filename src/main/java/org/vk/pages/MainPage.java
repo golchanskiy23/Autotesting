@@ -11,6 +11,12 @@ public class MainPage implements LoadableComponent {
 
     private final SelenideElement MESSAGE_SECTION = $x("//*[@class='toolbar_nav_i_ic']");
 
+    private static final SelenideElement GROUPS_SECTION = $x("//a[@data-l='t,userAltGroup']");
+
+    public MainPage() {
+        checkExistense();
+    }
+
     @Override
     public void checkExistense() {
         checkIsLoaded(NAVIGATION_ELEMENT);
@@ -20,6 +26,11 @@ public class MainPage implements LoadableComponent {
     public MessagePage openMessagePage() {
         MESSAGE_SECTION.click();
         return new MessagePage();
+    }
+
+    public GroupsPage openGroupsPage() {
+        GROUPS_SECTION.click();
+        return new GroupsPage();
     }
 
 }

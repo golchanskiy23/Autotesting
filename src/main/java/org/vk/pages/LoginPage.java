@@ -15,9 +15,10 @@ public class LoginPage implements LoadableComponent {
 
     private final SelenideElement Transition_Button = Selenide.$x("//*[@class='button-pro __wide']");
     private final SelenideElement Incorrect_Data = Selenide.$x("//*[@class='input-e login_error']");
+
     public LoginPage open() {
-        Selenide.open("https://ok.ru/");
-        return this;
+       checkExistense();
+       return this;
     }
 
     public LoginPage setUserData(User user) {
