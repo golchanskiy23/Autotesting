@@ -7,7 +7,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
-public class LoginPage {
+public class LoginPage implements LoadableComponent {
 
     private final SelenideElement Email_Field = Selenide.$x("//*[@id='field_email']");
 
@@ -16,7 +16,7 @@ public class LoginPage {
     private final SelenideElement Transition_Button = Selenide.$x("//*[@class='button-pro __wide']");
     private final SelenideElement Incorrect_Data = Selenide.$x("//*[@class='input-e login_error']");
     public LoginPage open() {
-        Selenide.open("/");
+        Selenide.open("https://ok.ru/");
         return this;
     }
 
@@ -26,14 +26,14 @@ public class LoginPage {
         return this;
     }
 
-    public LoginPage enterWithClick() {
+    public MainPage enterWithClick() {
         Transition_Button.shouldBe(Condition.visible).click();
-        return this;
+        return new MainPage();
     }
 
     public LoginPage enterWithButton() {
         Transition_Button.shouldBe(Condition.visible).sendKeys(Keys.ENTER);
-        return this;
+        return new MainPage();
     }
 
     public void isMessageWithIncorrectData() {
@@ -41,4 +41,11 @@ public class LoginPage {
         Incorrect_Data.shouldBe(Condition.visible);
     }
 
+    @Override
+    public void checkExistense() {
+        checkIsLoaded(Email_Field);
+        checkIsLoaded(Password_Field);
+        checkIsLoaded(Transition_Button);
+        checkIsLoaded(Incorrect_Data);
+    }
 }

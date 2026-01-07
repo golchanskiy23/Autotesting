@@ -6,7 +6,6 @@ import org.junit.jupiter.api.TestInstance;
 
 import org.ok.pages.LoginPage;
 import org.ok.utils.User;
-import org.ok.SupportFunctions;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IncorrectLoginTest extends BaseTest {
@@ -22,14 +21,12 @@ public class IncorrectLoginTest extends BaseTest {
 
     @Test
     public void incorrectLoginWithClick() {
-        SupportFunctions.login(loginPage, user);
-        loginPage.enterWithClick();
+        loginPage.open().setUserData(user).enterWithClick();
         loginPage.isMessageWithIncorrectData();
     }
 
     public void incorrectLoginDataWithKey() {
-        SupportFunctions.login(loginPage, user);
-        loginPage.enterWithButton();
+        loginPage.open().setUserData(user).enterWithButton();
         loginPage.isMessageWithIncorrectData();
     }
 }

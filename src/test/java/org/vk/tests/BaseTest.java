@@ -15,7 +15,6 @@ public abstract class BaseTest {
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled = true;
         Configuration.headless = false;
-        Configuration.baseUrl = "https://ok.ru/";
     }
 
     @BeforeAll
