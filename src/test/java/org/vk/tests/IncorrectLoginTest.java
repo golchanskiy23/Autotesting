@@ -2,14 +2,17 @@ package org.ok.tests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import org.ok.pages.LoginPage;
 import org.ok.utils.User;
+import org.ok.SupportFunctions;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IncorrectLoginTest extends BaseTest {
 
-    LoginPage loginPage;
-    User user;
+    private LoginPage loginPage;
+    private User user;
 
     @BeforeAll
     public void initializeLoginPage() {
@@ -18,20 +21,15 @@ public class IncorrectLoginTest extends BaseTest {
     }
 
     @Test
-    public void incorrectUserDataWithClick() {
-        login(user)
+    public void incorrectLoginWithClick() {
+        SupportFunctions.login(loginPage, user);
         loginPage.enterWithClick();
         loginPage.isMessageWithIncorrectData();
     }
 
-    @Test
-    public void incorrectUserDataWithKey() {
-        login(user);
+    public void incorrectLoginDataWithKey() {
+        SupportFunctions.login(loginPage, user);
         loginPage.enterWithButton();
         loginPage.isMessageWithIncorrectData();
-    }
-
-    private void login() {
-        loginPage.open().setUserData(user);
     }
 }
